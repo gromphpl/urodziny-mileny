@@ -1,0 +1,2365 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Safari Mileny 🦒 | 4. urodziny</title>
+
+<!-- Supabase -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+
+:root {
+    --green: #405a3d;
+    --dark-green: #29412d;
+    --olive: #7c8b52;
+    --sand: #f3e5c8;
+    --cream: #fffaf0;
+    --brown: #80613e;
+    --gold: #d5a94d;
+    --light-green: #e6ecd5;
+    --red: #a95145;
+    --text: #30352d;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    font-family: "Trebuchet MS", Arial, sans-serif;
+    color: var(--text);
+    background: var(--sand);
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero {
+    min-height: 100vh;
+    position: relative;
+    overflow: hidden;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 30px 20px;
+
+    background:
+        linear-gradient(
+            rgba(238,229,198,0.35),
+            rgba(238,229,198,0.65)
+        ),
+        linear-gradient(
+            135deg,
+            #cdd9b2,
+            #f2dfb8,
+            #c6d0a9
+        );
+}
+
+.hero::before {
+    content: "🌿";
+    position: absolute;
+    font-size: 170px;
+    left: -20px;
+    top: 20px;
+    opacity: .35;
+    transform: rotate(-15deg);
+}
+
+.hero::after {
+    content: "🌿";
+    position: absolute;
+    font-size: 180px;
+    right: -20px;
+    bottom: 20px;
+    opacity: .35;
+    transform: rotate(20deg);
+}
+
+.animal {
+    position: absolute;
+    font-size: 80px;
+    opacity: .9;
+}
+
+.animal-giraffe {
+    left: 4%;
+    bottom: 7%;
+}
+
+.animal-elephant {
+    right: 5%;
+    bottom: 8%;
+}
+
+.animal-lion {
+    left: 7%;
+    top: 12%;
+}
+
+.animal-zebra {
+    right: 8%;
+    top: 10%;
+}
+
+.hero-card {
+    position: relative;
+    z-index: 2;
+
+    width: min(850px, 100%);
+
+    padding: 55px 30px;
+
+    text-align: center;
+
+    background: rgba(255,250,240,.93);
+
+    border-radius: 35px;
+
+    box-shadow:
+        0 25px 70px rgba(48,45,30,.20);
+
+    border: 2px solid rgba(255,255,255,.7);
+}
+
+.small-title {
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    color: var(--olive);
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.hero h1 {
+    margin: 20px 0 10px;
+
+    font-family: Georgia, serif;
+
+    font-size: clamp(55px, 10vw, 105px);
+
+    line-height: .9;
+
+    color: var(--green);
+}
+
+.hero h1 span {
+    color: var(--gold);
+}
+
+.hero-subtitle {
+    font-family: Georgia, serif;
+    font-size: clamp(20px, 4vw, 30px);
+    margin: 25px 0;
+}
+
+.hero-date {
+    font-weight: bold;
+    font-size: 20px;
+    color: var(--brown);
+}
+
+.hero-place {
+    margin-top: 10px;
+    font-size: 17px;
+}
+
+.button {
+    display: inline-block;
+
+    margin-top: 28px;
+
+    padding: 14px 28px;
+
+    border-radius: 50px;
+
+    background: var(--green);
+    color: white;
+
+    text-decoration: none;
+
+    font-weight: bold;
+
+    transition: .25s;
+
+    border: none;
+
+    cursor: pointer;
+}
+
+.button:hover {
+    background: var(--dark-green);
+    transform: translateY(-2px);
+}
+
+/* =========================
+   MAIN
+========================= */
+
+main {
+    width: min(1050px, calc(100% - 30px));
+    margin: auto;
+    padding: 40px 0 80px;
+}
+
+section {
+    background: var(--cream);
+
+    margin: 25px 0;
+
+    padding: 40px 30px;
+
+    border-radius: 28px;
+
+    box-shadow: 0 10px 35px rgba(55,48,30,.10);
+}
+
+.section-title {
+    text-align: center;
+
+    font-family: Georgia, serif;
+
+    font-size: 38px;
+
+    color: var(--green);
+
+    margin-top: 0;
+}
+
+.section-intro {
+    text-align: center;
+
+    max-width: 700px;
+
+    margin: 0 auto 30px;
+
+    line-height: 1.7;
+}
+
+/* =========================
+   INFO
+========================= */
+
+.info-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fit, minmax(220px, 1fr));
+
+    gap: 18px;
+}
+
+.info-card {
+    padding: 25px;
+
+    background: #f6edda;
+
+    border-radius: 20px;
+
+    text-align: center;
+}
+
+.info-icon {
+    font-size: 40px;
+}
+
+.info-label {
+    margin-top: 10px;
+
+    color: var(--brown);
+
+    text-transform: uppercase;
+
+    font-size: 12px;
+
+    letter-spacing: 2px;
+
+    font-weight: bold;
+}
+
+.info-value {
+    margin-top: 7px;
+
+    font-weight: bold;
+
+    font-size: 18px;
+}
+
+/* =========================
+   PLAN
+========================= */
+
+.adventure {
+    max-width: 750px;
+    margin: auto;
+}
+
+.adventure-item {
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 18px;
+
+    padding: 18px 10px;
+
+    border-bottom: 1px dashed #cbbd9e;
+}
+
+.adventure-item:last-child {
+    border-bottom: none;
+}
+
+.adventure-icon {
+    width: 48px;
+    min-width: 48px;
+
+    height: 48px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background: #e7ecd7;
+
+    border-radius: 50%;
+
+    font-size: 25px;
+}
+
+.adventure-name {
+    font-size: 18px;
+
+    font-weight: bold;
+
+    color: var(--green);
+}
+
+.adventure-time {
+    display: block;
+
+    margin-top: 4px;
+
+    color: var(--brown);
+
+    font-size: 14px;
+}
+
+.note {
+    margin-top: 8px;
+
+    padding: 10px 14px;
+
+    background: var(--light-green);
+
+    border-left: 4px solid var(--olive);
+
+    border-radius: 8px;
+
+    font-size: 14px;
+
+    line-height: 1.5;
+}
+
+/* =========================
+   MENU
+========================= */
+
+.menu-group {
+    margin: 30px 0;
+}
+
+.menu-group h3 {
+    color: var(--brown);
+
+    font-family: Georgia, serif;
+
+    font-size: 23px;
+
+    margin-bottom: 15px;
+}
+
+.menu-list {
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fit, minmax(180px, 1fr));
+
+    gap: 12px;
+
+    list-style: none;
+
+    padding: 0;
+}
+
+.menu-list li {
+    background: #f6edda;
+
+    border-radius: 15px;
+
+    padding: 16px;
+
+    text-align: center;
+
+    font-weight: bold;
+}
+
+/* =========================
+   WISHLIST
+========================= */
+
+.wishlist-note {
+    background: #e8eddc;
+
+    border-left: 5px solid var(--olive);
+
+    border-radius: 15px;
+
+    padding: 20px;
+
+    margin-bottom: 30px;
+
+    line-height: 1.6;
+}
+
+.wishlist-note strong {
+    color: var(--green);
+}
+
+.wishlist-section-title {
+    color: var(--brown);
+
+    font-family: Georgia, serif;
+
+    font-size: 26px;
+
+    margin-top: 35px;
+
+    margin-bottom: 18px;
+
+    text-align: center;
+}
+
+.wishlist-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fit, minmax(210px, 1fr));
+
+    gap: 16px;
+}
+
+.gift {
+    padding: 22px;
+
+    background: #f6edda;
+
+    border-radius: 20px;
+
+    text-align: center;
+
+    transition: .25s;
+
+    border: 1px solid transparent;
+}
+
+.gift:hover {
+    transform: translateY(-3px);
+
+    border-color: #d8c79d;
+
+    box-shadow: 0 8px 20px rgba(60,50,30,.08);
+}
+
+.gift-icon {
+    font-size: 43px;
+}
+
+.gift h3 {
+    color: var(--green);
+
+    font-size: 17px;
+
+    min-height: 42px;
+}
+
+.gift-status {
+    display: inline-block;
+
+    padding: 6px 12px;
+
+    background: #dce7c8;
+
+    border-radius: 20px;
+
+    font-size: 12px;
+
+    color: var(--dark-green);
+}
+
+.gift-status.reserved {
+    background: #ead5ce;
+    color: #7c3d35;
+}
+
+.parent-label {
+    display: inline-block;
+
+    margin-bottom: 10px;
+
+    padding: 5px 10px;
+
+    border-radius: 15px;
+
+    background: #e4d5ad;
+
+    color: #66522c;
+
+    font-size: 11px;
+
+    font-weight: bold;
+
+    letter-spacing: .5px;
+}
+
+.reserve-button,
+.cancel-button {
+    margin-top: 15px;
+
+    padding: 10px 18px;
+
+    border: none;
+
+    border-radius: 25px;
+
+    color: white;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: .25s;
+}
+
+.reserve-button {
+    background: var(--green);
+}
+
+.reserve-button:hover {
+    background: var(--dark-green);
+
+    transform: translateY(-2px);
+}
+
+.cancel-button {
+    background: var(--red);
+}
+
+.cancel-button:hover {
+    transform: translateY(-2px);
+}
+
+.parent-idea {
+    background: #f1ead9;
+
+    border: 2px dashed #c8b88e;
+}
+
+/* =========================
+   LOADING
+========================= */
+
+.loading {
+    text-align: center;
+
+    padding: 25px;
+
+    color: var(--brown);
+
+    font-weight: bold;
+}
+
+.connection-error {
+    background: #f3d9d3;
+
+    border-left: 5px solid var(--red);
+
+    padding: 18px;
+
+    border-radius: 12px;
+
+    margin-bottom: 25px;
+
+    display: none;
+
+    line-height: 1.5;
+}
+
+/* =========================
+   MODALS
+========================= */
+
+.modal-overlay {
+    display: none;
+
+    position: fixed;
+
+    inset: 0;
+
+    background: rgba(35,40,30,.68);
+
+    z-index: 1000;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 20px;
+}
+
+.modal-overlay.active {
+    display: flex;
+}
+
+.modal {
+    width: min(460px, 100%);
+
+    max-height: 90vh;
+
+    overflow-y: auto;
+
+    background: var(--cream);
+
+    border-radius: 25px;
+
+    padding: 35px 25px;
+
+    text-align: center;
+
+    box-shadow: 0 25px 80px rgba(0,0,0,.3);
+}
+
+.modal-icon {
+    font-size: 55px;
+}
+
+.modal h2 {
+    color: var(--green);
+
+    font-family: Georgia, serif;
+}
+
+.modal p {
+    line-height: 1.6;
+}
+
+.modal-explanation {
+    background: #e8eddc;
+
+    border-radius: 14px;
+
+    padding: 15px;
+
+    margin: 20px 0;
+
+    text-align: left;
+
+    font-size: 14px;
+
+    line-height: 1.55;
+}
+
+.code-input {
+    width: 100%;
+
+    padding: 14px;
+
+    border-radius: 12px;
+
+    border: 2px solid #d4c8ae;
+
+    text-align: center;
+
+    font-family: monospace;
+
+    font-size: 22px;
+
+    letter-spacing: 3px;
+
+    text-transform: uppercase;
+
+    outline: none;
+
+    margin-bottom: 12px;
+}
+
+.code-input:focus {
+    border-color: var(--olive);
+}
+
+.code-help {
+    color: var(--brown);
+
+    font-size: 13px;
+
+    line-height: 1.5;
+
+    margin-bottom: 15px;
+}
+
+.modal-buttons {
+    display: flex;
+
+    gap: 10px;
+
+    justify-content: center;
+
+    margin-top: 25px;
+}
+
+.modal-buttons button {
+    padding: 12px 20px;
+
+    border: none;
+
+    border-radius: 25px;
+
+    cursor: pointer;
+
+    font-weight: bold;
+}
+
+.confirm-button {
+    background: var(--green);
+    color: white;
+}
+
+.close-button {
+    background: #ddd4c1;
+    color: var(--text);
+}
+
+.success-code {
+    margin: 20px 0;
+
+    padding: 18px;
+
+    background: #e8eddc;
+
+    border-radius: 15px;
+
+    border: 2px dashed var(--olive);
+}
+
+.success-code strong {
+    display: block;
+
+    margin-top: 8px;
+
+    font-family: monospace;
+
+    font-size: 28px;
+
+    letter-spacing: 4px;
+
+    color: var(--green);
+}
+
+/* =========================
+   GALLERY
+========================= */
+
+.gallery {
+    text-align: center;
+
+    padding: 55px 20px;
+}
+
+.gallery-lock {
+    font-size: 70px;
+}
+
+.gallery p {
+    max-width: 600px;
+
+    margin: 15px auto;
+
+    line-height: 1.6;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+    background: var(--dark-green);
+
+    color: white;
+
+    text-align: center;
+
+    padding: 45px 20px;
+}
+
+.footer-animals {
+    font-size: 32px;
+
+    margin-bottom: 15px;
+}
+
+footer p {
+    margin: 5px;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 600px) {
+
+    .hero-card {
+        padding: 40px 20px;
+    }
+
+    .animal {
+        font-size: 50px;
+    }
+
+    section {
+        padding: 30px 20px;
+    }
+
+    .section-title {
+        font-size: 31px;
+    }
+
+    .hero h1 {
+        font-size: 62px;
+    }
+
+    .modal-buttons {
+        flex-direction: column;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<header class="hero">
+
+    <div class="animal animal-lion">🦁</div>
+    <div class="animal animal-giraffe">🦒</div>
+    <div class="animal animal-elephant">🐘</div>
+    <div class="animal animal-zebra">🦓</div>
+
+    <div class="hero-card">
+
+        <div class="small-title">
+            Wielka safari przygoda
+        </div>
+
+        <h1>
+            Milena<br>
+            <span>4 lata!</span>
+        </h1>
+
+        <div class="hero-subtitle">
+            Zapraszamy małych odkrywców
+            na urodzinową wyprawę
+        </div>
+
+        <div class="hero-date">
+            📅 5 września 2026 · godz. 14:00
+        </div>
+
+        <div class="hero-place">
+            📍 Zabrze, ul. Jana Langowskiego 6
+        </div>
+
+        <a href="#wyprawa" class="button">
+            🐾 Odkryj wyprawę
+        </a>
+
+    </div>
+
+</header>
+
+
+<main>
+
+<section>
+
+    <h2 class="section-title">
+        🧭 Nasza wyprawa
+    </h2>
+
+    <p class="section-intro">
+        Przygotujcie się na wyjątkową przygodę!
+        Czeka nas dzień pełen zabawy, odkrywania,
+        zwierząt, niespodzianek i oczywiście
+        urodzinowej radości Mileny.
+    </p>
+
+    <div class="info-grid">
+
+        <div class="info-card">
+            <div class="info-icon">📅</div>
+            <div class="info-label">Data</div>
+            <div class="info-value">
+                5 września 2026
+            </div>
+        </div>
+
+        <div class="info-card">
+            <div class="info-icon">⏰</div>
+            <div class="info-label">Rozpoczynamy</div>
+            <div class="info-value">
+                godz. 14:00
+            </div>
+        </div>
+
+        <div class="info-card">
+            <div class="info-icon">📍</div>
+            <div class="info-label">Miejsce</div>
+            <div class="info-value">
+                Zabrze<br>
+                Jana Langowskiego 6
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+
+<section id="wyprawa">
+
+    <h2 class="section-title">
+        🐾 Plan wyprawy
+    </h2>
+
+    <p class="section-intro">
+        Nasza safari przygoda będzie pełna atrakcji.
+        Kolejność niektórych punktów pozostaje
+        tajemnicą — żeby odkrywcy mieli
+        jak najwięcej niespodzianek!
+    </p>
+
+    <div class="adventure">
+
+        <div class="adventure-item">
+            <div class="adventure-icon">🦒</div>
+            <div>
+                <div class="adventure-name">
+                    Powitanie małych odkrywców
+                </div>
+                <span class="adventure-time">14:30</span>
+            </div>
+        </div>
+
+        <div class="adventure-item">
+            <div class="adventure-icon">🎨</div>
+            <div class="adventure-name">
+                Malowanie twarzy
+            </div>
+        </div>
+
+        <div class="adventure-item">
+            <div class="adventure-icon">🛝</div>
+            <div class="adventure-name">
+                Dmuchaniec
+            </div>
+        </div>
+
+        <div class="adventure-item">
+            <div class="adventure-icon">🏊</div>
+            <div>
+                <div class="adventure-name">
+                    Basen
+                </div>
+
+                <div class="note">
+                    🩱 Prosimy o zabranie stroju
+                    kąpielowego dla dzieci
+                    oraz ręcznika.
+                </div>
+            </div>
+        </div>
+
+        <div class="adventure-item">
+            <div class="adventure-icon">🌿</div>
+            <div class="adventure-name">
+                Warsztaty Safari
+            </div>
+        </div>
+
+        <div class="adventure-item">
+            <div class="adventure-icon">🎂</div>
+            <div class="adventure-name">
+                Tort
+            </div>
+        </div>
+
+        <div class="adventure-item">
+            <div class="adventure-icon">🎁</div>
+            <div class="adventure-name">
+                Niespodzianka dla Mileny
+            </div>
+        </div>
+
+        <div class="adventure-item">
+            <div class="adventure-icon">🎵</div>
+            <div class="adventure-name">
+                Mini Disco
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+
+<section>
+
+    <h2 class="section-title">
+        🍽️ Safari Menu
+    </h2>
+
+    <p class="section-intro">
+        Po pełnej przygód wyprawie na naszych
+        odkrywców będzie czekać coś dobrego.
+    </p>
+
+    <div class="menu-group">
+
+        <h3>🌿 Przekąski</h3>
+
+        <ul class="menu-list">
+            <li>🍇 Owoce</li>
+            <li>🥨 Słone przekąski</li>
+            <li>🍿 Popcorn</li>
+            <li>🧀 Koreczki serowe</li>
+        </ul>
+
+    </div>
+
+    <div class="menu-group">
+
+        <h3>🔥 Safari z grilla i kuchni</h3>
+
+        <ul class="menu-list">
+            <li>🌭 Hot dogi</li>
+            <li>🔥 Kiełbaska z grilla</li>
+            <li>🍕 Pizza</li>
+            <li>🥞 Naleśniki</li>
+        </ul>
+
+    </div>
+
+    <div class="menu-group">
+
+        <h3>🍪 Słodka część safari</h3>
+
+        <ul class="menu-list">
+            <li>🦒 Ciasteczka safari</li>
+            <li>🍦 Lody</li>
+            <li>🎂 Tort urodzinowy Mileny</li>
+        </ul>
+
+    </div>
+
+    <div class="menu-group">
+
+        <h3>🥤 Napoje dla dzieci</h3>
+
+        <ul class="menu-list">
+            <li>💧 Woda</li>
+            <li>🍋 Lemoniada</li>
+            <li>🧃 Soki owocowe</li>
+            <li>🍵 Herbata</li>
+        </ul>
+
+    </div>
+
+    <div class="menu-group">
+
+        <h3>☕ Dla dorosłych</h3>
+
+        <ul class="menu-list">
+            <li>☕ Kawa</li>
+            <li>🍺 Piwo</li>
+        </ul>
+
+    </div>
+
+</section>
+
+
+<section id="wishlist">
+
+    <h2 class="section-title">
+        🎁 Wishlist Mileny
+    </h2>
+
+    <div class="wishlist-note">
+
+        💚 <strong>Mała podpowiedź</strong>
+
+        <br><br>
+
+        Wszystko, co jest związane z
+        <strong>
+            Pokémonami / Pikachu,
+            Krainą Lodu,
+            Huntrix,
+            Bluey
+            oraz Akademią Jednorożców
+        </strong>,
+        jest aktualnie bardzo na czasie
+        i na pewno sprawi Milenie dużo radości. 🥰
+
+    </div>
+
+    <div id="connectionError" class="connection-error">
+        ⚠️ Nie udało się połączyć z bazą danych.
+        Sprawdź połączenie z internetem i odśwież stronę.
+    </div>
+
+    <p class="section-intro">
+
+        Jeśli wybierzesz prezent z listy,
+        możesz go zarezerwować jednym kliknięciem.
+        Nie trzeba podawać imienia ani żadnych danych.
+
+    </p>
+
+    <h3 class="wishlist-section-title">
+        🦒 Prezenty z wishlisty Mileny
+    </h3>
+
+    <div class="wishlist-grid" id="wishlistGrid">
+
+        <div class="loading">
+            🦒 Ładowanie wishlisty...
+        </div>
+
+    </div>
+
+    <h3 class="wishlist-section-title">
+        💡 Masz własny pomysł?
+    </h3>
+
+    <div class="wishlist-grid">
+
+        <div class="gift parent-idea">
+
+            <div class="gift-icon">
+                💡
+            </div>
+
+            <div class="parent-label">
+                POMYSŁ RODZICA
+            </div>
+
+            <h3>
+                Dodaj swój pomysł
+            </h3>
+
+            <p>
+                Wpisz prezent, który chciałbyś
+                podarować Milenie.
+            </p>
+
+            <button
+                class="reserve-button"
+                onclick="addOwnIdea()">
+
+                💡 Dodaj swój pomysł
+
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<section class="gallery">
+
+    <div class="gallery-lock">
+        🔐
+    </div>
+
+    <h2 class="section-title">
+        📸 Galeria Safari
+    </h2>
+
+    <p>
+        Po zakończeniu urodzin znajdziecie tutaj
+        zdjęcia z naszej wspólnej wyprawy.
+    </p>
+
+    <p>
+        Galeria będzie dostępna po wpisaniu
+        kodu dostępu.
+    </p>
+
+    <button
+        class="button"
+        onclick="openGallery()">
+
+        🔐 Otwórz galerię
+
+    </button>
+
+</section>
+
+</main>
+
+
+<!-- =========================
+     MODAL REZERWACJI
+========================= -->
+
+<div class="modal-overlay" id="reservationModal">
+
+    <div class="modal">
+
+        <div class="modal-icon">
+            🎁
+        </div>
+
+        <h2>
+            Rezerwacja prezentu
+        </h2>
+
+        <p id="reservationText"></p>
+
+        <div class="modal-buttons">
+
+            <button
+                class="confirm-button"
+                onclick="showCodeForm()">
+
+                TAK, REZERWUJĘ
+
+            </button>
+
+            <button
+                class="close-button"
+                onclick="closeReservationModal()">
+
+                ANULUJ
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     MODAL KODU
+========================= -->
+
+<div class="modal-overlay" id="codeFormModal">
+
+    <div class="modal">
+
+        <div class="modal-icon">
+            🔐
+        </div>
+
+        <h2>
+            Ustal swój kod rezerwacji
+        </h2>
+
+        <div class="modal-explanation">
+
+            <strong>
+                Po co potrzebny jest kod?
+            </strong>
+
+            <br><br>
+
+            Podaj łatwy do zapamiętania
+            <strong>kod rezerwacji</strong>,
+            abyś mógł go później wykorzystać
+            w razie potrzeby
+            <strong>anulowania swojej rezerwacji</strong>.
+
+            <br><br>
+
+            Nie musisz podawać swojego imienia
+            ani żadnych innych danych.
+
+        </div>
+
+        <input
+            type="text"
+            id="newCodeInput"
+            class="code-input"
+            maxlength="30"
+            placeholder="Np. MILENA123"
+            autocomplete="off">
+
+        <input
+            type="text"
+            id="newCodeRepeat"
+            class="code-input"
+            maxlength="30"
+            placeholder="Powtórz kod"
+            autocomplete="off">
+
+        <div class="code-help">
+
+            💡 Wybierz coś prostego, co łatwo
+            zapamiętasz, np.
+            <strong>KASIA</strong>,
+            <strong>TATA123</strong>
+            albo
+            <strong>MILENA</strong>.
+
+        </div>
+
+        <div class="modal-buttons">
+
+            <button
+                class="confirm-button"
+                onclick="saveReservation()">
+
+                ZAPISZ REZERWACJĘ
+
+            </button>
+
+            <button
+                class="close-button"
+                onclick="closeCodeForm()">
+
+                WRÓĆ
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     SUKCES
+========================= -->
+
+<div class="modal-overlay" id="successModal">
+
+    <div class="modal">
+
+        <div class="modal-icon">
+            🎉
+        </div>
+
+        <h2>
+            Rezerwacja zapisana!
+        </h2>
+
+        <p>
+            Prezent został zarezerwowany.
+        </p>
+
+        <div class="success-code">
+
+            Twój kod rezerwacji:
+
+            <strong id="successCode"></strong>
+
+        </div>
+
+        <p>
+            Zapamiętaj swój kod.
+            Będzie potrzebny, jeśli w razie
+            pomyłki zechcesz anulować rezerwację.
+        </p>
+
+        <div class="modal-buttons">
+
+            <button
+                class="confirm-button"
+                onclick="closeSuccessModal()">
+
+                GOTOWE
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     ANULOWANIE
+========================= -->
+
+<div class="modal-overlay" id="cancelModal">
+
+    <div class="modal">
+
+        <div class="modal-icon">
+            ↩️
+        </div>
+
+        <h2>
+            Anulowanie rezerwacji
+        </h2>
+
+        <p id="cancelText"></p>
+
+        <div class="modal-explanation">
+
+            🔐 Podaj kod, który ustaliłeś
+            podczas rezerwacji.
+
+            <br><br>
+
+            Kod jest potrzebny, aby potwierdzić,
+            że to Ty chcesz anulować swoją
+            rezerwację.
+
+        </div>
+
+        <input
+            type="text"
+            id="cancelCodeInput"
+            class="code-input"
+            maxlength="30"
+            placeholder="Twój kod"
+            autocomplete="off">
+
+        <div class="modal-buttons">
+
+            <button
+                class="confirm-button"
+                onclick="confirmCancellation()">
+
+                ANULUJ REZERWACJĘ
+
+            </button>
+
+            <button
+                class="close-button"
+                onclick="closeCancelModal()">
+
+                WRÓĆ
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<footer>
+
+    <div class="footer-animals">
+        🌿 🦁 🌿 🦒 🌿 🐘 🌿 🦓 🌿
+    </div>
+
+    <p>
+        Safari Mileny
+    </p>
+
+    <p>
+        4. urodziny · 5 września 2026
+    </p>
+
+</footer>
+
+
+<script>
+
+/* =====================================================
+   SUPABASE
+===================================================== */
+
+const SUPABASE_URL =
+    "https://lereaxdhhxasbpkjaesq.supabase.co";
+
+const SUPABASE_KEY =
+    "sb_publishable_I08ZIRwqExfYndpHATkrqg_lvdSQndy";
+
+
+const supabaseClient =
+    window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+    );
+
+
+/* =====================================================
+   ZMIENNE
+===================================================== */
+
+let selectedGift = null;
+
+
+/* =====================================================
+   PREZENTY
+===================================================== */
+
+const defaultGiftIcons = {
+
+    "figurki-safari": "🦁",
+
+    "gepard-maskotka": "🐆",
+
+    "gepard-lunchbox": "🍱",
+
+    "gepard-bidon": "🥤",
+
+    "laboratorium": "🧪",
+
+    "rumi": "👧",
+
+    "zoey": "👧",
+
+    "mikroskop": "🔬",
+
+    "karaoke": "🎤",
+
+    "jednorozec": "🦄",
+
+    "lego-stitch": "🧱",
+
+    "lego-frozen": "❄️",
+
+    "lego-huntrix": "🎤",
+
+    "wykopaliska": "🦴",
+
+    "poszukiwacz": "🧭",
+
+    "mapa-albik": "🌍"
+
+};
+
+
+/* =====================================================
+   POBIERANIE WISHLISTY
+===================================================== */
+
+async function loadWishlist() {
+
+    const grid =
+        document.getElementById(
+            "wishlistGrid"
+        );
+
+    const errorBox =
+        document.getElementById(
+            "connectionError"
+        );
+
+
+    try {
+
+        const { data, error } =
+            await supabaseClient
+                .from("wishlist")
+                .select(
+                    "id,name,parent_idea,reserved"
+                )
+                .order(
+                    "parent_idea",
+                    { ascending: true }
+                );
+
+
+        if (error) {
+            throw error;
+        }
+
+
+        grid.innerHTML = "";
+
+
+        if (!data || data.length === 0) {
+
+            grid.innerHTML =
+                '<div class="loading">' +
+                '🎁 Wishlist jest pusta.' +
+                '</div>';
+
+            return;
+        }
+
+
+        data.forEach(
+            function(gift) {
+
+                renderGift(
+                    gift
+                );
+
+            }
+        );
+
+
+        errorBox.style.display =
+            "none";
+
+
+    } catch (error) {
+
+        console.error(
+            "Błąd Supabase:",
+            error
+        );
+
+
+        errorBox.style.display =
+            "block";
+
+
+        grid.innerHTML =
+            '<div class="loading">' +
+            '⚠️ Nie udało się załadować wishlisty.' +
+            '</div>';
+
+    }
+
+}
+
+
+/* =====================================================
+   RENDER PREZENTU
+===================================================== */
+
+function renderGift(gift) {
+
+    const grid =
+        document.getElementById(
+            "wishlistGrid"
+        );
+
+
+    const div =
+        document.createElement(
+            "div"
+        );
+
+
+    div.className =
+        "gift";
+
+
+    div.dataset.gift =
+        gift.id;
+
+
+    div.dataset.name =
+        gift.name;
+
+
+    if (gift.parent_idea) {
+
+        div.classList.add(
+            "parent-idea"
+        );
+
+    }
+
+
+    const icon =
+        defaultGiftIcons[gift.id]
+        || (gift.parent_idea
+            ? "💡"
+            : "🎁");
+
+
+    const parentLabel =
+        gift.parent_idea
+        ? `
+            <div class="parent-label">
+                POMYSŁ RODZICA
+            </div>
+          `
+        : "";
+
+
+    let statusHtml;
+
+
+    if (gift.reserved) {
+
+        statusHtml = `
+            <span class="gift-status reserved">
+                🔒 Zarezerwowany
+            </span>
+
+            <br>
+
+            <button
+                class="cancel-button"
+                onclick="openCancelModal('${escapeAttribute(gift.id)}')">
+
+                ↩️ Anuluj moją rezerwację
+
+            </button>
+        `;
+
+    } else {
+
+        statusHtml = `
+            <span class="gift-status">
+                Dostępny
+            </span>
+
+            <br>
+
+            <button
+                class="reserve-button"
+                onclick="askReservation(
+                    '${escapeAttribute(gift.id)}'
+                )">
+
+                🎁 Rezerwuję
+
+            </button>
+        `;
+
+    }
+
+
+    div.innerHTML = `
+
+        <div class="gift-icon">
+            ${icon}
+        </div>
+
+        ${parentLabel}
+
+        <h3>
+            ${escapeHtml(gift.name)}
+        </h3>
+
+        ${statusHtml}
+
+    `;
+
+
+    grid.appendChild(
+        div
+    );
+
+}
+
+
+/* =====================================================
+   REZERWACJA — PIERWSZE OKNO
+===================================================== */
+
+function askReservation(giftId) {
+
+    selectedGift =
+        giftId;
+
+
+    const gift =
+        document.querySelector(
+            '[data-gift="' +
+            CSS.escape(giftId) +
+            '"]'
+        );
+
+
+    if (!gift) {
+        return;
+    }
+
+
+    const name =
+        gift.dataset.name;
+
+
+    document.getElementById(
+        "reservationText"
+    ).innerHTML =
+
+        "Czy potwierdzasz rezerwację prezentu:" +
+        "<br><br>" +
+        "<strong>" +
+        escapeHtml(name) +
+        "</strong>" +
+        "?";
+
+
+    document.getElementById(
+        "reservationModal"
+    ).classList.add(
+        "active"
+    );
+
+}
+
+
+/* =====================================================
+   FORMULARZ KODU
+===================================================== */
+
+function showCodeForm() {
+
+    document.getElementById(
+        "reservationModal"
+    ).classList.remove(
+        "active"
+    );
+
+
+    document.getElementById(
+        "newCodeInput"
+    ).value = "";
+
+
+    document.getElementById(
+        "newCodeRepeat"
+    ).value = "";
+
+
+    document.getElementById(
+        "codeFormModal"
+    ).classList.add(
+        "active"
+    );
+
+
+    setTimeout(
+        function() {
+
+            document.getElementById(
+                "newCodeInput"
+            ).focus();
+
+        },
+        100
+    );
+
+}
+
+
+/* =====================================================
+   ZAPIS REZERWACJI DO SUPABASE
+===================================================== */
+
+async function saveReservation() {
+
+    if (!selectedGift) {
+        return;
+    }
+
+
+    const code =
+        document.getElementById(
+            "newCodeInput"
+        )
+        .value
+        .trim()
+        .toUpperCase();
+
+
+    const repeat =
+        document.getElementById(
+            "newCodeRepeat"
+        )
+        .value
+        .trim()
+        .toUpperCase();
+
+
+    if (code.length < 3) {
+
+        alert(
+            "⚠️ Kod powinien mieć co najmniej 3 znaki."
+        );
+
+        return;
+
+    }
+
+
+    if (code !== repeat) {
+
+        alert(
+            "⚠️ Podane kody nie są takie same."
+        );
+
+        return;
+
+    }
+
+
+    try {
+
+        const {
+            data,
+            error
+        } =
+            await supabaseClient
+                .rpc(
+                    "reserve_gift",
+                    {
+                        p_gift_id:
+                            selectedGift,
+
+                        p_code:
+                            code
+                    }
+                );
+
+
+        if (error) {
+            throw error;
+        }
+
+
+        if (data !== true) {
+
+            alert(
+                "⚠️ Nie udało się zarezerwować prezentu.\n\n" +
+                "Możliwe, że ktoś zarezerwował go chwilę wcześniej " +
+                "albo ten kod jest już używany."
+            );
+
+            await loadWishlist();
+
+            return;
+        }
+
+
+        document.getElementById(
+            "codeFormModal"
+        ).classList.remove(
+            "active"
+        );
+
+
+        document.getElementById(
+            "successCode"
+        ).innerText =
+            code;
+
+
+        document.getElementById(
+            "successModal"
+        ).classList.add(
+            "active"
+        );
+
+
+        await loadWishlist();
+
+
+    } catch (error) {
+
+        console.error(
+            error
+        );
+
+        alert(
+            "⚠️ Wystąpił problem podczas zapisywania rezerwacji.\n\n" +
+            "Spróbuj ponownie."
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   ANULOWANIE
+===================================================== */
+
+function openCancelModal(giftId) {
+
+    selectedGift =
+        giftId;
+
+
+    const gift =
+        document.querySelector(
+            '[data-gift="' +
+            CSS.escape(giftId) +
+            '"]'
+        );
+
+
+    const name =
+        gift
+        ? gift.dataset.name
+        : "ten prezent";
+
+
+    document.getElementById(
+        "cancelText"
+    ).innerHTML =
+
+        "Anulujesz rezerwację:<br><br>" +
+        "<strong>" +
+        escapeHtml(name) +
+        "</strong>";
+
+
+    document.getElementById(
+        "cancelCodeInput"
+    ).value = "";
+
+
+    document.getElementById(
+        "cancelModal"
+    ).classList.add(
+        "active"
+    );
+
+
+    setTimeout(
+        function() {
+
+            document.getElementById(
+                "cancelCodeInput"
+            ).focus();
+
+        },
+        100
+    );
+
+}
+
+
+/* =====================================================
+   ANULOWANIE W SUPABASE
+===================================================== */
+
+async function confirmCancellation() {
+
+    if (!selectedGift) {
+        return;
+    }
+
+
+    const code =
+        document.getElementById(
+            "cancelCodeInput"
+        )
+        .value
+        .trim()
+        .toUpperCase();
+
+
+    if (!code) {
+
+        alert(
+            "⚠️ Wpisz kod rezerwacji."
+        );
+
+        return;
+
+    }
+
+
+    try {
+
+        const {
+            data,
+            error
+        } =
+            await supabaseClient
+                .rpc(
+                    "cancel_gift",
+                    {
+                        p_gift_id:
+                            selectedGift,
+
+                        p_code:
+                            code
+                    }
+                );
+
+
+        if (error) {
+            throw error;
+        }
+
+
+        if (data !== true) {
+
+            alert(
+                "❌ Nieprawidłowy kod rezerwacji."
+            );
+
+            return;
+        }
+
+
+        closeCancelModal();
+
+
+        await loadWishlist();
+
+
+        alert(
+            "✅ Rezerwacja została anulowana.\n\n" +
+            "Prezent jest ponownie dostępny."
+        );
+
+
+    } catch (error) {
+
+        console.error(
+            error
+        );
+
+        alert(
+            "⚠️ Wystąpił problem podczas anulowania rezerwacji."
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   POMYSŁ RODZICA
+===================================================== */
+
+async function addOwnIdea() {
+
+    const idea =
+        prompt(
+            "💡 Wpisz swój pomysł na prezent dla Mileny:"
+        );
+
+
+    if (
+        !idea ||
+        !idea.trim()
+    ) {
+        return;
+    }
+
+
+    const name =
+        idea.trim();
+
+
+    try {
+
+        const id =
+            "parent-" +
+            Date.now() +
+            "-" +
+            Math.random()
+                .toString(36)
+                .substring(2, 8);
+
+
+        const {
+            error
+        } =
+            await supabaseClient
+                .from("wishlist")
+                .insert({
+                    id: id,
+                    name: name,
+                    parent_idea: true,
+                    reserved: false
+                });
+
+
+        if (error) {
+            throw error;
+        }
+
+
+        await loadWishlist();
+
+
+        alert(
+            "💡 Pomysł został dodany do wishlisty!"
+        );
+
+
+    } catch (error) {
+
+        console.error(
+            error
+        );
+
+
+        alert(
+            "⚠️ Nie udało się dodać pomysłu.\n\n" +
+            "Spróbuj ponownie."
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   ZAMKNIĘCIE MODALI
+===================================================== */
+
+function closeReservationModal() {
+
+    document.getElementById(
+        "reservationModal"
+    ).classList.remove(
+        "active"
+    );
+
+    selectedGift =
+        null;
+
+}
+
+
+function closeCodeForm() {
+
+    document.getElementById(
+        "codeFormModal"
+    ).classList.remove(
+        "active"
+    );
+
+    selectedGift =
+        null;
+
+}
+
+
+function closeSuccessModal() {
+
+    document.getElementById(
+        "successModal"
+    ).classList.remove(
+        "active"
+    );
+
+    selectedGift =
+        null;
+
+}
+
+
+function closeCancelModal() {
+
+    document.getElementById(
+        "cancelModal"
+    ).classList.remove(
+        "active"
+    );
+
+    selectedGift =
+        null;
+
+}
+
+
+/* =====================================================
+   GALERIA
+===================================================== */
+
+function openGallery() {
+
+    alert(
+        "📸 Galeria będzie dostępna po zakończeniu imprezy."
+    );
+
+}
+
+
+/* =====================================================
+   BEZPIECZNE TEKSTY
+===================================================== */
+
+function escapeHtml(text) {
+
+    const div =
+        document.createElement(
+            "div"
+        );
+
+    div.textContent =
+        text;
+
+    return div.innerHTML;
+
+}
+
+
+function escapeAttribute(text) {
+
+    return String(text)
+        .replace(
+            /\\/g,
+            "\\\\"
+        )
+        .replace(
+            /'/g,
+            "\\'"
+        );
+
+}
+
+
+/* =====================================================
+   AUTOMATYCZNE ODŚWIEŻANIE
+===================================================== */
+
+setInterval(
+    function() {
+
+        loadWishlist();
+
+    },
+    10000
+);
+
+
+/* =====================================================
+   START
+===================================================== */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function() {
+
+        loadWishlist();
+
+    }
+);
+
+</script>
+
+</body>
+</html>
