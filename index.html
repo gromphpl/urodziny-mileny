@@ -782,20 +782,52 @@ section {
 
 .gallery {
     text-align: center;
-
     padding: 55px 20px;
 }
 
 .gallery-lock {
     font-size: 70px;
+    margin-bottom: 8px;
 }
 
 .gallery p {
     max-width: 600px;
-
     margin: 15px auto;
-
     line-height: 1.6;
+}
+
+.gallery-button {
+    margin-top: 22px;
+}
+
+.gallery-modal-note {
+    background: #e8eddc;
+    border-radius: 14px;
+    padding: 15px;
+    margin: 18px 0 20px;
+    text-align: left;
+    font-size: 14px;
+    line-height: 1.55;
+}
+
+.gallery-error {
+    display: none;
+    margin: 12px 0 0;
+    padding: 11px 14px;
+    border-radius: 10px;
+    background: #f3d9d3;
+    color: #7c3d35;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.gallery-error.active {
+    display: block;
+}
+
+.gallery-code-input {
+    text-transform: uppercase;
+    margin-bottom: 0;
 }
 
 /* =========================
@@ -1215,12 +1247,12 @@ footer p {
     </p>
 
     <p>
-        Galeria będzie dostępna po wpisaniu
-        kodu dostępu.
+        Galeria jest dostępna dla gości posiadających
+        kod dostępu.
     </p>
 
     <button
-        class="button"
+        class="button gallery-button"
         onclick="openGallery()">
 
         🔐 Otwórz galerię
@@ -1228,6 +1260,72 @@ footer p {
     </button>
 
 </section>
+
+<!-- =========================
+     MODAL GALERII
+========================= -->
+
+<div class="modal-overlay" id="galleryModal">
+
+    <div class="modal">
+
+        <div class="modal-icon">
+            📸
+        </div>
+
+        <h2>
+            Galeria Safari
+        </h2>
+
+        <p>
+            Podaj kod dostępu otrzymany od rodziców Mileny.
+        </p>
+
+        <div class="gallery-modal-note">
+            🔒 Kod jest sprawdzany po stronie bazy danych.
+            Adres galerii nie znajduje się bezpośrednio
+            w kodzie tej strony.
+        </div>
+
+        <input
+            type="text"
+            id="galleryCodeInput"
+            class="code-input gallery-code-input"
+            maxlength="60"
+            placeholder="Kod dostępu"
+            autocomplete="off"
+            autocapitalize="characters"
+            onkeydown="if(event.key === 'Enter') verifyGalleryCode()">
+
+        <div
+            id="galleryError"
+            class="gallery-error">
+        </div>
+
+        <div class="modal-buttons">
+
+            <button
+                class="confirm-button"
+                id="galleryConfirmButton"
+                onclick="verifyGalleryCode()">
+
+                OTWÓRZ GALERIĘ
+
+            </button>
+
+            <button
+                class="close-button"
+                onclick="closeGalleryModal()">
+
+                ANULUJ
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
 
 </main>
 
@@ -2291,9 +2389,130 @@ function closeCancelModal() {
 
 function openGallery() {
 
-    alert(
-        "📸 Galeria będzie dostępna po zakończeniu imprezy."
-    );
+    const modal =
+        document.getElementById("galleryModal");
+
+    const input =
+        document.getElementById("galleryCodeInput");
+
+    const error =
+        document.getElementById("galleryError");
+
+    error.classList.remove("active");
+    error.innerText = "";
+    input.value = "";
+
+    modal.classList.add("active");
+
+    setTimeout(function() {
+        input.focus();
+    }, 100);
+
+}
+
+
+function closeGalleryModal() {
+
+    document
+        .getElementById("galleryModal")
+        .classList.remove("active");
+
+}
+
+document
+    .getElementById("galleryModal")
+    .addEventListener("click", function(event) {
+
+        if (event.target === this) {
+            closeGalleryModal();
+        }
+
+    });
+
+
+async function verifyGalleryCode() {
+
+    const input =
+        document.getElementById("galleryCodeInput");
+
+    const error =
+        document.getElementById("galleryError");
+
+    const button =
+        document.getElementById("galleryConfirmButton");
+
+    const code =
+        input.value
+            .trim()
+            .toUpperCase();
+
+    error.classList.remove("active");
+    error.innerText = "";
+
+    if (code.length < 3) {
+
+        error.innerText =
+            "⚠️ Wpisz kod dostępu.";
+
+        error.classList.add("active");
+        input.focus();
+
+        return;
+    }
+
+    button.disabled = true;
+    button.innerText = "SPRAWDZAM...";
+
+    try {
+
+        const {
+            data,
+            error: rpcError
+        } =
+            await supabaseClient
+                .rpc(
+                    "get_gallery_url",
+                    {
+                        p_code: code
+                    }
+                );
+
+        if (rpcError) {
+            throw rpcError;
+        }
+
+        if (!data) {
+
+            error.innerText =
+                "❌ Nieprawidłowy kod dostępu.";
+
+            error.classList.add("active");
+            input.select();
+
+            return;
+        }
+
+        window.location.href = data;
+
+    } catch (error) {
+
+        console.error(
+            "Błąd galerii:",
+            error
+        );
+
+        error.innerText =
+            "⚠️ Nie udało się sprawdzić kodu. " +
+            "Spróbuj ponownie za chwilę.";
+
+        error.classList.add("active");
+
+    } finally {
+
+        button.disabled = false;
+        button.innerText = "OTWÓRZ GALERIĘ";
+
+    }
 
 }
 
